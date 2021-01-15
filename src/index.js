@@ -4,15 +4,16 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import 'semantic-ui-css/semantic.min.css';
 //IMPORTING THE REDUCER AND THE STATE PROVIDER
-import { CharactersContext } from './appContext';
+import { StarwarsProvider } from './appContext';
 import reducer, { initialState } from './reducer'
 
 ReactDOM.render(
   <React.StrictMode>
-    <CharactersContext initialState={initialState} reducer={reducer}>
+    <StarwarsProvider initialState={initialState} reducer={reducer}>
       <App />
-    </CharactersContext>
+    </StarwarsProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

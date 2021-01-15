@@ -4,6 +4,7 @@ import Navbar from './components/Navbar'
 import Characters from './components/Characters';
 import Planets from './components/Planets';
 import Home from './components/Home';
+import CharactersCard from './components/CharactersCard';
 
 function App() {
 

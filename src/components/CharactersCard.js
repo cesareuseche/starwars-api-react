@@ -1,4 +1,7 @@
-import React from 'react'
+import React, { useContext, useState } from 'react';
+import Characters from './Characters';
+import { CharactersContext } from '../appContext';
+
 
 
 function CharactersCard({ name, hair_color, eye_color }) {

@@ -1,24 +1,33 @@
-import React, { createContext, useContext, useReducer, useState } from "react"
+import React, { createContext, useContext, useReducer, useState, useEffect } from "react"
 
 // Prepares the CONTEXT API
-export const CharactersContext = createContext();
+export const StarwarsContext = createContext();
 
-export const CharactersProvider = () => {
-    const [charactes, SetCharacters] = useState([
-        {
-            "birth_year": "19 BBY",
-            "eye_color": "Blue",
-            "gender": "Male",
-            "hair_color": "Blond",
-            "height": "172",
-            "homeworld": "https://www.swapi.tech/api/planets/1/",
-            "mass": "77",
-            "name": "Luke Skywalker",
-            "skin_color": "Fair",
-            "created": "2014-12-09T13:50:51.644000Z",
-            "edited": "2014-12-10T13:52:43.172000Z",
+export const StarwarsProvider = (props) => {
+    const [characters, SetCharacters] = useState([]);
+    const [planets, setPlanets] = useState([]);
 
+    useEffect(() => {
+        async function fetchCharaters() {
+            let res = await fetch('https://www.swapi.tech/api/people/?format=json');
+            let data = await res.json();
+            SetCharacters(data.results);
         }
-    ]);
-}
+
+        async function fetchPlanets() {
+            let res = await fetch('https://www.swapi.tech/api/planets/?format=json');
+            let data = await res.json();
+            setPlanets(data.results);
+        }
+
+        fetchCharaters();
+        fetchPlanets();
+    }, [])
+    console.log('data', characters)
+    return (
+        <StarwarsContext.Provider value={[characters, SetCharacters, planets, setPlanets]}>
+            {props.children}
+        </StarwarsContext.Provider>
+    );
+};
 
